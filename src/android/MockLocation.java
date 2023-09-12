@@ -45,7 +45,7 @@ public class MockLocation extends CordovaPlugin {
      * 
      */
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
 
         this.callbackContext = callbackContext;
 
@@ -66,22 +66,15 @@ public class MockLocation extends CordovaPlugin {
      */
     private void getLastKnownLocation() {
         
-        JSONObject result = new JSONObject();
-        
         if (ActivityCompat.checkSelfPermission(cordova.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             LocationManager locationManager = (LocationManager) cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            if (location != null) {
+            JSONObject result = new JSONObject();
+            if(location != null) {
 
                 try {
-
-                    // location info
-                        // result.put("latitude", location.getLatitude());
-                        // result.put("longitude", location.getLongitude());
-                        // result.put("accuracy", location.getAccuracy());
-                        // result.put("time", location.getTime());
 
                     result.put("isMock", isMockLocation(location));
                     result.put("message", "");
@@ -93,12 +86,17 @@ public class MockLocation extends CordovaPlugin {
                 }
 
                 callbackContext.success(result);
-
             }
             else {
 
-                result.put("message", "No last known location available");
-                callbackContext.error(result);
+                try {
+                    result.put("message", "No last known location available");
+                    callbackContext.error(result);
+                }
+                catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
             }
         }
         else {
@@ -114,7 +112,7 @@ public class MockLocation extends CordovaPlugin {
      * 
      */
     @Override
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
 
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
 
@@ -124,8 +122,15 @@ public class MockLocation extends CordovaPlugin {
             }
             else {
 
-                result.put("message", "Location permission denied");
-                callbackContext.error(result);
+                JSONObject result = new JSONObject();
+                try {
+                    result.put("message", "Location permission denied");
+                    callbackContext.error(result);
+                }
+                catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -138,7 +143,7 @@ public class MockLocation extends CordovaPlugin {
      */
     private boolean isMockLocation(Location location) {
 
-        boolean isMock = false;
+        boolean isMock;
         
         if (Build.VERSION.SDK_INT >= 31) {
             
