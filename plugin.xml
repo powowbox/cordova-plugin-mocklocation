@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-plugin-mocklocation" version="1.0.0">
+
+  <name>Mock Location</name>
+
+  <engines>
+	  <engine name="cordova" version=">=10.0.0"/>
+  </engines>
+
+  <js-module src="www/mocklocation.js" name="MockLocation">
+	  <clobbers target="window.plugins.mocklocation" />
+  </js-module>
+
+  <platform name="android">
+  
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="MockLocation">
+        <param name="android-package" value="com.webkokteyli.plugins.mocklocation.MockLocation"/>
+      </feature>
+    </config-file>
+	
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    </config-file>
+	
+    <source-file src="src/android/MockLocation.java" target-dir="src/com/webkokteyli/plugins/mocklocation"/>
+  
+  </platform>
+
+</plugin>

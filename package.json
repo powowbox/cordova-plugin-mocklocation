@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-mocklocation",
+  "version": "1.0.0",
+  "description": "Mock Location",
+  "author": "dwengs",
+  "cordova": {
+    "id": "cordova-plugin-mocklocation",
+    "platforms": "android"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwengs/cordova-plugin-mocklocation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dwengs/cordova-plugin-mocklocation/issues"
+  },
+  "homepage": "https://github.com/dwengs/cordova-plugin-mocklocation#readme",
+  "keywords": [
+    "cordova",
+    "mock",
+    "location",
+	  "mocklocation"
+  ],
+  "license": "Apache-2.0"
+}
