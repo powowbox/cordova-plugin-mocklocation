@@ -6,7 +6,7 @@ A Cordova plugin to check if locations are mocked. Only works for Android platfo
 
 Plugin gets "lastKnownLocation()" and uses "isMocked()" for  >= API 31, "isFromMockProvider()" for < API 30.
 
-This plugin itself does not get geolocation data, so, to get "lastKnownLocation()", you HAVE TO get location first via another plugin like "cordova-plugin-geolocation".
+This plugin uses "lastKnownLocation()" data, so, you MAY WANT to get location first via another plugin like "cordova-plugin-geolocation".
 
 Should work > API 24. (Android 7).
 
