@@ -1,52 +1,57 @@
 # cordova-plugin-mocklocation
 
-A Cordova plugin to check if locations are mocked. Only works for Android platform.
+A Cordova plugin to check if current location is mocked with mock/fake location programs. **Only works on Android platform** and returns `isMocked()` result.
 
-## How does it work
-
-Plugin gets "lastKnownLocation()" and uses "isMocked()" for  >= API 31, "isFromMockProvider()" for < API 30.
-
-This plugin uses "lastKnownLocation()" data, so, you MAY WANT to get location first via another plugin like "cordova-plugin-geolocation".
+Plugin gets `lastKnownLocation()` from one of the avaliable location providers (passive, network etc.) and uses `isMocked()` for  >= API 31, `isFromMockProvider()` for < API 30.
 
 Should work > API 24. (Android 7).
 
-## Usage
+### Return
+
+- Returns `success: true` and `isMock: true/false` if location fetch is successful.
+- Returns `success: false` and `error.code: xx, error.message: xx` if location fetch is unsuccessful.
+
+## Example
 
 ```js
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 
-  // get geolocation data first
-  var watchID = navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  async function run(){
 
-  // geolocation success (system has recent location data)
-  function onSuccess(){
-
-    // check if mocked
-    window.plugins.mocklocation.check(successCallback, errorCallback);
-
-    // check success
-    function successCallback(result) {
-
-      console.log(result);
-
-      // result = {
-      //   isMock: true / false,
-      //   message: "",
-      // }
+    let mockResult = await checkMockLocation();
+    if(typeof mockResult.error === 'undefined'){
+      if(!mockResult.data.isMock){
+        // not mocked
+      }
+      else{
+        // mocked
+      }
+    }
+    else{
+      console.log(mockResult.error.code);
+      console.log(mockResult.error.message);
     }
 
-    // error (permission errors etc.)
-    function errorCallback(error) {
-
-      console.log(error);
-
-      // error = {
-      //   message: "Lorem ipsum",
-      // }
+    async function checkMockLocation(){
+      if(device.platform != 'Android'){
+        return false;
+      }
+      else{
+        return new Promise((onSuccess, onError) => {
+            if(typeof window.plugins.mocklocation.check !== 'undefined'){
+              window.plugins.mocklocation.check(onSuccess, onError);
+            }
+            else{
+              console.log('Plugin not found: plugins.mocklocation.check()');
+            }
+        });
+      }
     }
   }
 
+  //
+  run();
 }
 ```

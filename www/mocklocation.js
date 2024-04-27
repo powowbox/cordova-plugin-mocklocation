@@ -4,8 +4,8 @@
  */
 var mocklocation = {
 
-    isFromMockProvider: function (successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, 'MockLocation', 'isFromMockProvider', []);
+    check: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, 'MockLocation', 'check', []);
     }
 }
 
