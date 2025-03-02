@@ -1,6 +1,6 @@
 # cordova-plugin-mocklocation
 
-A Cordova plugin to check if current location is mocked with mock/fake location programs. **Only works on Android platform** and returns `isMocked()` result.
+A Cordova plugin to check if current location is mocked with mock/fake location programs.
 
 Plugin gets `lastKnownLocation()` from one of the avaliable location providers (passive, network etc.) and uses `isMocked()` for  >= API 31, `isFromMockProvider()` for < API 30.
 
