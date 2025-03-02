@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.webkokteyli.plugins.mocklocation;
 
 import java.util.List;
@@ -17,9 +14,6 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 
-/**
- *
- */
 public class MockLocation extends CordovaPlugin {
 
     @Override
@@ -34,7 +28,7 @@ public class MockLocation extends CordovaPlugin {
         return false;
     }
 
-    private void check(CallbackContext callbackContext) throws JSONException{
+    private void isLocationSimulated(CallbackContext callbackContext) throws JSONException{
 
         JSONObject resultJSON = new JSONObject();
 
@@ -91,7 +85,6 @@ public class MockLocation extends CordovaPlugin {
             resultJSON.put("error", error);
         }
 
-        //
         PluginResult result = new PluginResult(PluginResult.Status.OK, resultJSON);
         callbackContext.sendPluginResult(result);
     }
