@@ -27,7 +27,7 @@ public class MockLocation extends CordovaPlugin {
     return false;
   }
 
-  private void returnError(CallbackContext callbackContex, String message) {
+  private void returnError(CallbackContext callbackContext, String message) {
     PluginResult result = new PluginResult(PluginResult.Status.ERROR, message);
     callbackContext.sendPluginResult(result);
   }
