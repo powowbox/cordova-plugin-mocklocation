@@ -13,29 +13,14 @@ Should work > API 24. (Android 7) and iOS 15+.
 Add ios 15+ support
 
 
-### Return
-
-- Returns `success: true` and `isMock: true/false` if location fetch is successful.
-- Returns `success: false` and `error.code: xx, error.message: xx` if location fetch is unsuccessful.
-
 ## Example
 
 ```js
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-
-  async function run(){
-
   window.plugins.mocklocation.check(
-    isMocked => console.log(`isMocked: ${$isMocked}`),  
-    error => {
-      console.error(error.code);
-      console.error(error.message);
-    });
-  }
-
-  //
-  run();
+    isMocked => console.log(`isMocked: ${isMocked}`),  
+    errorString => console.error(errorString));
 }
 ```
