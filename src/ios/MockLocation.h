@@ -4,4 +4,5 @@
 @interface MockLocation : CDVPlugin
 
 - (void)check:(CDVInvokedUrlCommand*)command;
+
 @end
