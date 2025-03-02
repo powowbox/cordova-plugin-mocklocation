@@ -4,7 +4,7 @@ A Cordova plugin to check if current location is mocked with mock/fake location 
 
 Plugin gets `lastKnownLocation()` from one of the avaliable location providers (passive, network etc.) and uses `isMocked()` for  >= API 31, `isFromMockProvider()` for < API 30.
 
-For IOS 15+, use CLLocationManager see: https://stackoverflow.com/a/78190700/9459302
+For IOS 15+, use CLLocationManager, see: https://stackoverflow.com/a/78190700/9459302
 
 Should work > API 24. (Android 7) and iOS 15+.
 
