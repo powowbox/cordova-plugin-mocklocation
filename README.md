@@ -20,7 +20,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
   window.plugins.mocklocation.check(
-    isMocked => console.log(`isMocked: ${isMocked}`),  
+    isMockedBoolean => console.log(`isMocked: ${isMockedBoolean}`),  
     errorString => console.error(errorString));
 }
 ```
