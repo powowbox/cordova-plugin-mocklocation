@@ -39,7 +39,8 @@ public class MockLocation extends CordovaPlugin {
 
         LocationManager locationManager = (LocationManager) cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager == null) {
-          return returnError(callbackContext, "LOCATION_MANAGER_OBJ_NOT_FOUND");
+          returnError(callbackContext, "LOCATION_MANAGER_OBJ_NOT_FOUND");
+          return;
         }
 
         Location location = null;
@@ -64,7 +65,8 @@ public class MockLocation extends CordovaPlugin {
         Log.d("chromium", "[INFO:CONSOLE] Used location provider is: " + usedProvider);
 
         if (location == null) {
-          return returnError(callbackContext, "LOCATION_OBJ_NOT_FOUND");
+          returnError(callbackContext, "LOCATION_OBJ_NOT_FOUND");
+          return;
         }
 
         boolean isMock = (Build.VERSION.SDK_INT < 31) ? location.isFromMockProvider() : location.isMock();
