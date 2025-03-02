@@ -28,11 +28,8 @@ public class MockLocation extends CordovaPlugin {
     return false;
   }
 
-  private void returnError(CallbackContext callbackContex, String code, String message) {
-    JSONObject error = new JSONObject();
-    error.put("code", code);
-    error.put("message", message);
-    result = new PluginResult(PluginResult.Status.OK, error);
+  private void returnError(CallbackContext callbackContex, String message) {
+    result = new PluginResult(PluginResult.Status.ERROR, message);
     callbackContext.sendPluginResult(result);
   }
 
@@ -42,7 +39,7 @@ public class MockLocation extends CordovaPlugin {
 
         LocationManager locationManager = (LocationManager) cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager == null) {
-          return returnError(callbackContext, "LOCATION_MANAGER_OBJ_NOT_FOUND", "locationManager not found.");
+          return returnError(callbackContext, "LOCATION_MANAGER_OBJ_NOT_FOUND");
         }
 
         Location location = null;
@@ -67,7 +64,7 @@ public class MockLocation extends CordovaPlugin {
         Log.d("chromium", "[INFO:CONSOLE] Used location provider is: " + usedProvider);
 
         if (location == null) {
-          return returnError(callbackContext, "LOCATION_OBJ_NOT_FOUND", "location object not found. (lastKnownLocation may be null)");
+          return returnError(callbackContext, "LOCATION_OBJ_NOT_FOUND");
         }
 
         boolean isMock = (Build.VERSION.SDK_INT < 31) ? location.isFromMockProvider() : location.isMock();
