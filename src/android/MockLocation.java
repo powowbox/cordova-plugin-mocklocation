@@ -20,8 +20,7 @@ public class MockLocation extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
     if (action.equals("check")) {
-
-      check(callbackContext);
+      isLocationSimulated(callbackContext);
       return true;
     }
 
@@ -29,7 +28,7 @@ public class MockLocation extends CordovaPlugin {
   }
 
   private void returnError(CallbackContext callbackContex, String message) {
-    result = new PluginResult(PluginResult.Status.ERROR, message);
+    PluginResult result = new PluginResult(PluginResult.Status.ERROR, message);
     callbackContext.sendPluginResult(result);
   }
 
