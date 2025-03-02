@@ -25,35 +25,12 @@ function onDeviceReady() {
 
   async function run(){
 
-    let mockResult = await checkMockLocation();
-    if(typeof mockResult.error === 'undefined'){
-      if(!mockResult.data.isMock){
-        // not mocked
-      }
-      else{
-        // mocked
-      }
-    }
-    else{
-      console.log(mockResult.error.code);
-      console.log(mockResult.error.message);
-    }
-
-    async function checkMockLocation(){
-      if(device.platform != 'Android'){
-        return false;
-      }
-      else{
-        return new Promise((onSuccess, onError) => {
-            if(typeof window.plugins.mocklocation.check !== 'undefined'){
-              window.plugins.mocklocation.check(onSuccess, onError);
-            }
-            else{
-              console.log('Plugin not found: plugins.mocklocation.check()');
-            }
-        });
-      }
-    }
+  window.plugins.mocklocation.check(
+    isMocked => console.log(`isMocked: ${$isMocked}`),  
+    error => {
+      console.error(error.code);
+      console.error(error.message);
+    });
   }
 
   //
